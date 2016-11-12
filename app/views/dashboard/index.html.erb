@@ -1,0 +1,9 @@
+<h1>Dashboard</h1>
+<h2>Add a workshop</h2>
+<%= render 'workshops/form', workshop: Workshop.new %>
+<h2>Previous Workshops </h2>
+<ul>
+<% for @workshop in @workshops %>
+	<li><%= @workshop.name %></li> 
+<% end %>
+</ul>

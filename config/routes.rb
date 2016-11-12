@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
+
+  root 'dashboard#index'
   resources :purchases
   resources :attendances
   resources :workshops
