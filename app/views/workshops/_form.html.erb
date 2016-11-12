@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label "Teachers:" %>
+    <%= collection_check_boxes(:workshop, :teacher_ids, Teacher.all, :id, :name) %>
+  </div>
+  <div class="field">
     <%= f.label :held_on %>
     <%= f.date_select :held_on %>
   </div>

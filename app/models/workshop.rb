@@ -1,7 +1,7 @@
 class Workshop < ApplicationRecord
-  has_and_belongs_to_many :workshops
+  has_and_belongs_to_many :teachers
 
   def name
-    "Mark - #{held_on}"
+    "#{teachers.map(&:name).join(", ")} - #{held_on}"
   end
 end
