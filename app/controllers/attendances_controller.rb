@@ -32,7 +32,7 @@ class AttendancesController < ApplicationController
 	student.update_attributes!(passes_remaining: student.passes_remaining - 1)
 	ClassPassTransaction.create!(student: student, delta: -1)
         format.html { redirect_to @attendance.workshop, notice: 'Attendance was successfully created.' }
-        format.json { render :show, status: :created, location: @attendance }
+        format.json { render :show, status: :created, location: @attendance.workshop }
       else
         format.html { render :new }
         format.json { render json: @attendance.errors, status: :unprocessable_entity }

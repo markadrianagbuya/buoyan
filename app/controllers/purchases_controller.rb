@@ -36,7 +36,7 @@ class PurchasesController < ApplicationController
 	  student.update_attributes!(passes_remaining: student.passes_remaining + 1)
 	  ClassPassTransaction.create!(student: student, delta: 1)
 	end 
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
