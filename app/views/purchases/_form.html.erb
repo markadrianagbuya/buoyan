@@ -1,0 +1,27 @@
+<%= form_for(purchase) do |f| %>
+  <% if purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% purchase.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :package_id %>
+    <%= collection_select(:purchase, :package_id, Package.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :student_id %>
+    <%= collection_select(:purchase, :student_id, Student.all, :id, :name) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

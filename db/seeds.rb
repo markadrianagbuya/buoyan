@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+Package.create(name: "Basic Single Pass", price: 15)
+Package.create(name: "First Workshop Pass", price: 10)
+Package.create(name: "4-Workshop Pass", price: 50)
+
