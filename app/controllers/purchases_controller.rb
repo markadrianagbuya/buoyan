@@ -28,6 +28,14 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.save
+	student = @purchase.student
+	if @purchase.package.name == "4-Workshop Pass"
+	  student.update_attributes!(passes_remaining: student.passes_remaining + 4)
+	  ClassPassTransaction.create!(student: student, delta: 4)
+	else
+	  student.update_attributes!(passes_remaining: student.passes_remaining + 1)
+	  ClassPassTransaction.create!(student: student, delta: 1)
+	end 
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
