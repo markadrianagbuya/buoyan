@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Notes</th>
       <th>Held on</th>
       <th colspan="3"></th>
     </tr>
@@ -13,6 +14,7 @@
   <tbody>
     <% @workshops.each do |workshop| %>
       <tr>
+        <td><%= workshop.notes %></td>
         <td><%= workshop.held_on %></td>
         <td><%= link_to 'Show', workshop %></td>
         <td><%= link_to 'Edit', edit_workshop_path(workshop) %></td>
