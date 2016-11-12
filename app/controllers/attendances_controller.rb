@@ -31,7 +31,7 @@ class AttendancesController < ApplicationController
 	student = @attendance.student
 	student.update_attributes!(passes_remaining: student.passes_remaining - 1)
 	ClassPassTransaction.create!(student: student, delta: -1)
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully created.' }
+        format.html { redirect_to @attendance.workshop, notice: 'Attendance was successfully created.' }
         format.json { render :show, status: :created, location: @attendance }
       else
         format.html { render :new }

@@ -4,6 +4,17 @@
   <strong>Held on:</strong>
   <%= @workshop.held_on %>
 </p>
+<h3>Add Attendee</h3>
+
+<%= render 'attendances/form', attendance: Attendance.new(workshop: @workshop) %>
+<p>
+  <strong>Attendees:</strong>
+  <ul>
+	  <% for @attendee in @workshop.attendees %>
+		  <li><%= "#{@attendee.name} (#{@attendee.passes_remaining} passes remaining)" %>
+	  <% end %>
+  </ul> 
+</p>
 
 <%= link_to 'Edit', edit_workshop_path(@workshop) %> |
 <%= link_to 'Back', workshops_path %>
