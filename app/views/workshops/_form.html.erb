@@ -11,9 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field checkbox-list">
     <%= f.label "Teachers:" %>
-    <%= collection_check_boxes(:workshop, :teacher_ids, Teacher.all, :id, :name) %>
+    <%= collection_check_boxes(:workshop, :teacher_ids, Teacher.all, :id, :name) do |cb|%>
+      <div class="checkbox">
+        <label>
+          <%= cb.check_box %><%= cb.label %>
+        </label>
+      </div>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :held_on %>
@@ -25,6 +31,6 @@
     <%= f.text_area :notes %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Workshop", class: "btn btn-success"%>
   </div>
 <% end %>
