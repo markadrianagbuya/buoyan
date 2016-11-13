@@ -21,9 +21,9 @@
       <%= f.label :workshop_id %>
       <%= f.collection_select(:workshop_id, Workshop.all, :id, :name) %>
     </div>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
   <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
