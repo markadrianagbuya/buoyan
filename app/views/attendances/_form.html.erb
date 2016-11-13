@@ -16,12 +16,10 @@
     <%= f.collection_select(:student_id, Student.all, :id, :name) %>
   </div>
 
-  <% if attendance.workshop_id.blank? %>
-    <div class="field">
-      <%= f.label :workshop_id %>
-      <%= f.collection_select(:workshop_id, Workshop.all, :id, :name) %>
-    </div>
-  <% end %>
+  <div class="field">
+    <%= f.label :workshop_id %>
+    <%= f.collection_select(:workshop_id, Workshop.all, :id, :name) %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
