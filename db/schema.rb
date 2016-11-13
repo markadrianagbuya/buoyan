@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20161112110527) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "workshop_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["student_id"], name: "index_attendances_on_student_id"
-    t.index ["workshop_id"], name: "index_attendances_on_workshop_id"
+    t.index ["student_id"], name: "index_attendances_on_student_id", using: :btree
+    t.index ["workshop_id"], name: "index_attendances_on_workshop_id", using: :btree
   end
 
   create_table "class_pass_transactions", force: :cascade do |t|
@@ -26,7 +29,7 @@ ActiveRecord::Schema.define(version: 20161112110527) do
     t.integer  "delta"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "index_class_pass_transactions_on_student_id"
+    t.index ["student_id"], name: "index_class_pass_transactions_on_student_id", using: :btree
   end
 
   create_table "packages", force: :cascade do |t|
@@ -41,8 +44,8 @@ ActiveRecord::Schema.define(version: 20161112110527) do
     t.integer  "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["package_id"], name: "index_purchases_on_package_id"
-    t.index ["student_id"], name: "index_purchases_on_student_id"
+    t.index ["package_id"], name: "index_purchases_on_package_id", using: :btree
+    t.index ["student_id"], name: "index_purchases_on_student_id", using: :btree
   end
 
   create_table "students", force: :cascade do |t|
@@ -61,8 +64,8 @@ ActiveRecord::Schema.define(version: 20161112110527) do
   create_table "teachers_workshops", id: false, force: :cascade do |t|
     t.integer "workshop_id", null: false
     t.integer "teacher_id",  null: false
-    t.index ["teacher_id", "workshop_id"], name: "index_teachers_workshops_on_teacher_id_and_workshop_id"
-    t.index ["workshop_id", "teacher_id"], name: "index_teachers_workshops_on_workshop_id_and_teacher_id"
+    t.index ["teacher_id", "workshop_id"], name: "index_teachers_workshops_on_teacher_id_and_workshop_id", using: :btree
+    t.index ["workshop_id", "teacher_id"], name: "index_teachers_workshops_on_workshop_id_and_teacher_id", using: :btree
   end
 
   create_table "workshops", force: :cascade do |t|
@@ -72,4 +75,9 @@ ActiveRecord::Schema.define(version: 20161112110527) do
     t.text     "notes"
   end
 
+  add_foreign_key "attendances", "students"
+  add_foreign_key "attendances", "workshops"
+  add_foreign_key "class_pass_transactions", "students"
+  add_foreign_key "purchases", "packages"
+  add_foreign_key "purchases", "students"
 end
