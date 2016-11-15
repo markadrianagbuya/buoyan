@@ -11,7 +11,12 @@
 
   <body>
     <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
+      <% if admin_signed_in? %>
+        <%= link_to('Logout', destroy_admin_session_path, :method => :delete) %>  
+      <% end %>
     </div>
   </body>
 </html>
