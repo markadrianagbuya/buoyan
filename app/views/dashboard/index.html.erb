@@ -6,7 +6,7 @@
     <h2>Previous Workshops </h2>
     <ul>
       <% for @workshop in @workshops %>
-        <li><%= @workshop.name %></li> 
+        <li><%= @workshop.name %> <%= link_to 'Show', @workshop %> </li> 
       <% end %>
     </ul>
   </div>

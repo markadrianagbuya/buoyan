@@ -4,6 +4,6 @@ class Workshop < ApplicationRecord
   has_many :attendees, through: :attendances, source: :student
 
   def name
-    "#{teachers.map(&:name).map(&:capitalize).join(", ")} - #{held_on}"
+    "#{teachers.map(&:name).map(&:capitalize).join(", ")} - #{held_on.strftime('%d %B %Y')}"
   end
 end
