@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :package_id %>
-    <%= collection_select(:purchase, :package_id, Package.all, :id, :name) %>
+    <%= collection_select(:purchase, :package_id, Package.all, :id, :name, {}, class: "form-control") %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :student_id %>
-    <%= collection_select(:purchase, :student_id, Student.all, :id, :name) %>
+    <%= collection_select(:purchase, :student_id, Student.all, :id, :name, {}, class: "form-control") %>
   </div>
 
   <div class="actions">

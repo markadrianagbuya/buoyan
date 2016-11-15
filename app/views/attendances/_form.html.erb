@@ -11,15 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :student_id %>
-    <%= f.collection_select(:student_id, Student.all, :id, :name) %>
+    <%= f.collection_select(:student_id, Student.all, :id, :name, {}, class: "form-control") %>
   </div>
 
-  <div class="field">
-    <%= f.label :workshop_id %>
-    <%= f.collection_select(:workshop_id, Workshop.all, :id, :name) %>
-  </div>
+  <% if attendance.workshop_id.present? %>
+    <%= f.hidden_field :workshop_id %>
+  <% else %>
+    <div class="field form-group">
+      <%= f.label :workshop_id %>
+      <%= f.collection_select(:workshop_id, Workshop.all, :id, :name, {}, class: "form-control") %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Create Attendance", class: "btn btn-info"%>
