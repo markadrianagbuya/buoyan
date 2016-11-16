@@ -15,8 +15,7 @@
 <div class="row">
   <div class="col-sm-6">
     <h3>Record Attendance</h3>
-
-    <%= render 'attendances/form', attendance: Attendance.new(workshop: @workshop), students: Student.where("id NOT in (?)", @workshop.attendees.map(&:id))%>
+    <%= render 'attendances/form', attendance: Attendance.new(workshop: @workshop), students: Student.where.not(id: @workshop.attendees.map(&:id)) %>
   </div>
   <div class="col-sm-6">
     <h3>Record Purchase</h3>

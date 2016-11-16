@@ -23,7 +23,7 @@
   </div>
   <div class="field form-group">
     <%= f.label :held_on %>
-    <%= f.date_select :held_on, {}, class: "form-control"%>
+    <%= f.text_field :held_on, value: workshop.held_on.strftime('%d %b %Y'), class: "form-control bootstrap-datepicker" %>
   </div>
 
   <div class="field form-group">

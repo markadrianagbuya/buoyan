@@ -2,7 +2,7 @@
   <div class="col-xs-12">
     <h1>Dashboard</h1>
     <h2>Add a workshop</h2>
-    <%= render 'workshops/form', workshop: Workshop.new %>
+    <%= render 'workshops/form', workshop: Workshop.new(held_on: Date.today) %>
     <h2>Previous Workshops </h2>
     <ul>
       <% for @workshop in @workshops %>
