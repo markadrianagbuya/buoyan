@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116091409) do
+ActiveRecord::Schema.define(version: 20161116110351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,11 +32,22 @@ ActiveRecord::Schema.define(version: 20161116091409) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "attendance_recordings", force: :cascade do |t|
+    t.boolean  "attending"
+    t.integer  "student_id"
+    t.integer  "workshop_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["student_id"], name: "index_attendance_recordings_on_student_id", using: :btree
+    t.index ["workshop_id"], name: "index_attendance_recordings_on_workshop_id", using: :btree
+  end
+
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "workshop_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "attending"
     t.index ["student_id"], name: "index_attendances_on_student_id", using: :btree
     t.index ["workshop_id"], name: "index_attendances_on_workshop_id", using: :btree
   end
@@ -92,6 +103,8 @@ ActiveRecord::Schema.define(version: 20161116091409) do
     t.text     "notes"
   end
 
+  add_foreign_key "attendance_recordings", "students"
+  add_foreign_key "attendance_recordings", "workshops"
   add_foreign_key "attendances", "students"
   add_foreign_key "attendances", "workshops"
   add_foreign_key "class_pass_transactions", "students"

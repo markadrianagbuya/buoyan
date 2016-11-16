@@ -8,6 +8,6 @@ class Workshop < ApplicationRecord
   end
 
   def attendees
-    students.map{ |student| Attendee.new(student) }
+    attendances.where(attending: true).map{|attendance| Attendee.new(attendance.student, attendance) }
   end
 end

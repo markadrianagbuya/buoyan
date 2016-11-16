@@ -1,7 +1,10 @@
 class Attendee
-  def initialize(student)
+  def initialize(student, attendance)
     @student = student
+    @attendance = attendance
   end
+
+  attr_accessor :student, :attendance
 
   def to_s
     [
@@ -11,8 +14,6 @@ class Attendee
   end
 
   private
-
-  attr_accessor :student
 
   def class_pass_details
     return if has_unlimited_passes?

@@ -24,15 +24,11 @@ class AttendancesController < ApplicationController
   # POST /attendances
   # POST /attendances.json
   def create
-    @attendance = Attendance.new(attendance_params)
-
+    attendance = AttendanceRecording.new(attendance_params)
     respond_to do |format|
-      if @attendance.save
-	student = @attendance.student
-	student.update_attributes!(passes_remaining: student.passes_remaining - 1)
-	ClassPassTransaction.create!(student: student, delta: -1)
-        format.html { redirect_to @attendance.workshop, notice: 'Attendance was successfully created.' }
-        format.json { render :show, status: :created, location: @attendance.workshop }
+      if attendance.record_attending
+        format.html { redirect_to attendance.workshop, notice: "#{attendance.student.name} was marked as attending" }
+        format.json { render :show, status: :created, location: attendance.workshop }
       else
         format.html { render :new }
         format.json { render json: @attendance.errors, status: :unprocessable_entity }
@@ -40,26 +36,13 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /attendances/1
-  # PATCH/PUT /attendances/1.json
-  def update
-    respond_to do |format|
-      if @attendance.update(attendance_params)
-        format.html { redirect_to @attendance, notice: 'Attendance was successfully updated.' }
-        format.json { render :show, status: :ok, location: @attendance }
-      else
-        format.html { render :edit }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /attendances/1
   # DELETE /attendances/1.json
   def destroy
-    @attendance.destroy
+    attendance = AttendanceRecording.new(@attendance.attributes.slice("workshop_id", "student_id"))
+    attendance.record_absent
+    
     respond_to do |format|
-      format.html { redirect_to attendances_url, notice: 'Attendance was successfully destroyed.' }
+      format.html { redirect_to attendance.workshop, notice: "#{attendance.student.name} was marked as absent." }
       format.json { head :no_content }
     end
   end

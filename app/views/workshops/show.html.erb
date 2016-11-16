@@ -14,7 +14,7 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <h3>Add Attendee</h3>
+    <h3>Record Attendance</h3>
 
     <%= render 'attendances/form', attendance: Attendance.new(workshop: @workshop), students: Student.where("id NOT in (?)", @workshop.attendees.map(&:id))%>
   </div>
@@ -29,10 +29,8 @@
     <h3>Attendees:</h3>
     <ul>
       <% for @attendee in @workshop.attendees %>
-        <li><%= @attendee %></li>
+        <li><%= @attendee %> <%= link_to 'Mark as absent', @attendee.attendance, method: :delete, data: { confirm: 'Are you sure?' } %></li>
       <% end %>
     </ul> 
-    <%= link_to 'Edit', edit_workshop_path(@workshop) %> |
-    <%= link_to 'Back', workshops_path %>
   </div>
 </div>
