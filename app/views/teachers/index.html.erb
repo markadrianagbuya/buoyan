@@ -1,0 +1,16 @@
+<h1>Teachers</h1>
+<table>
+<thead>
+<th>Name</th>
+<th>Classes Taught</th>
+</thead>
+<tbody>
+<% for teacher in @teachers %>
+  <tr>
+    <td><%= teacher.name %></td>
+    <td><%= Workshop.all.select{|w| w.teachers.include?(teacher)}.map{|w| 1.0/w.teachers.count}.sum %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<p>Find me in app/views/teachers/index.html.erb</p>
