@@ -13,7 +13,7 @@
 
   <div class="field form-group">
     <%= f.label :student_id %>
-    <%= f.collection_select(:student_id, students || Student.all, :id, :name, {}, class: "form-control") %>
+    <%= f.collection_select(:student_id, students || Student.all, :id, :name, {}, class: "form-control search-select") %>
   </div>
 
   <% if attendance.workshop_id.present? %>
@@ -29,3 +29,7 @@
     <%= f.submit "Record as attending", class: "btn btn-info"%>
   </div>
 <% end %>
+
+<script>
+  $('.search-select').select2({});
+</script>
