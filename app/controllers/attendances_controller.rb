@@ -24,11 +24,16 @@ class AttendancesController < ApplicationController
   # POST /attendances
   # POST /attendances.json
   def create
-    attendance = AttendanceRecording.new(attendance_params)
+    attendance_params.fetch(:student_id, []).select(&:present?).each do |student_id|
+      attendance = AttendanceRecording.new({student_id: student_id, workshop_id: attendance_params[:workshop_id]})
+      attendance.record_attending
+    end
+		  
     respond_to do |format|
-      if attendance.record_attending
-        format.html { redirect_to attendance.workshop, notice: "#{attendance.student.name} was marked as attending" }
-        format.json { render :show, status: :created, location: attendance.workshop }
+      if true # TODO fix
+        workshop = Workshop.find(attendance_params[:workshop_id])
+        format.html { redirect_to workshop }
+        format.json { render :show, status: :created, location: workshop }
       else
         format.html { render :new }
         format.json { render json: @attendance.errors, status: :unprocessable_entity }
@@ -55,6 +60,6 @@ class AttendancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attendance_params
-      params.require(:attendance).permit(:student_id, :workshop_id)
+      params.require(:attendance).permit(:workshop_id, student_id: [])
     end
 end

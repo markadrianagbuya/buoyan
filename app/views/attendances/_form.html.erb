@@ -13,7 +13,7 @@
 
   <div class="field form-group">
     <%= f.label :student_id %>
-    <%= f.collection_select(:student_id, students || Student.all, :id, :name, {}, class: "form-control search-select") %>
+    <%= f.collection_select(:student_id, students || Student.all, :id, :name, {}, { multiple: true, class: "form-control search-select" } ) %>
   </div>
 
   <% if attendance.workshop_id.present? %>
